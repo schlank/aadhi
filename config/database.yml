@@ -1,26 +1,18 @@
 default: &default
-  adapter: mysql
-  pool: 5
   timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: "auto@123"
+  database: stubs
+  host: aadhi-mysql
 
 development:
-  adapter: mysql
-  database: stubs
-  username: root
-  password: auto@123
-  host: localhost
+  <<: *default
 
 test:
-  adapter: mysql
-  database: stubs
-  username: root
-  password: auto@123
-  host: localhost
+  <<: *default
 
 production:
-  adapter: mysql
-  database: stubs
-  username: root
-  password: auto@123
-  host: localhost
-
+  <<: *default
