@@ -17,7 +17,7 @@ gem 'turbolinks'
 
 
 #Use mysql to main the records
-gem 'mysql2'
+gem 'mysql'
 
 #front end libraries
 gem "therubyracer"
