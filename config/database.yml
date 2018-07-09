@@ -1,7 +1,7 @@
 default: &default
   timeout: 5000
   adapter: mysql
-  encoding: utf8_unicode_ci
+  encoding: utf8
   pool: 5
   username: root
   password: "auto@123"
