@@ -5,7 +5,7 @@ require ::File.expand_path('../config/environment', __FILE__)
 class RootSiteAuth < Rack::Auth::Basic
   def call(env)
     request = Rack::Request.new(env)
-    if ['/stubs/'].include? request.path
+    if ['/', '/stubs/*', '/scenarios/debug', '/aadhiconfig/', 'features/*', '/report/*', 'search/*', 'status'].include? request.path
       super
     else
       @app.call(env)
@@ -14,7 +14,7 @@ class RootSiteAuth < Rack::Auth::Basic
 end
 
 use RootSiteAuth, "Restricted Area" do |username, password|
-  [username, password] == ['admin', 'admin']
+  [username, password] == ['aadhiadmin', 'jA7U3e@!']
 end
 
 run Rails.application
