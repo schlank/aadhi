@@ -1,5 +1,5 @@
 class ReportController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate
   include ReportsHelper
 
   def report

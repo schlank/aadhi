@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-
+  before_filter :authenticate
   def search_scenario_index
 
   end

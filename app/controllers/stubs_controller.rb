@@ -1,5 +1,5 @@
 class StubsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate
   # skip_before_filter :verify_authenticity_token
 
   def index
