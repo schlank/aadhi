@@ -5,7 +5,8 @@ require ::File.expand_path('../config/environment', __FILE__)
 class RootSiteAuth < Rack::Auth::Basic
   def call(env)
     request = Rack::Request.new(env)
-    if ['/', '/stubs/*', '/scenarios/debug', '/aadhiconfig/', 'features/*', '/report/*', 'search/*', 'status'].include? request.path
+    puts request.path
+    if ['/', '/stubs', '/scenarios/debug', '/aadhiconfig', 'features', '/report', '/search/', '/status/'].grep.any? request.path
       super
     else
       @app.call(env)
