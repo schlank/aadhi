@@ -3,6 +3,8 @@ module ApplicationHelper
         content_tag :span, nil, hash.merge(class: "glyphicon glyphicon-#{icon_name_postfix.to_s.gsub('_','-')}")
   end
 
+
+
   def logged_in?
     not request.authorization.nil?
   end
