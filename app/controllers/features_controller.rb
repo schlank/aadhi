@@ -1,7 +1,6 @@
 class FeaturesController < ApplicationController
-  before_filter :authenticate
 	# http_basic_authenticate_with name: "dhh", password: "secret", only: :index
-	#  skip_before_filter :verify_authenticity_token
+	 skip_before_filter :verify_authenticity_token
 
 	include FeaturesHelper
 	

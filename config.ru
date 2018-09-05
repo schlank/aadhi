@@ -3,20 +3,20 @@
 require ::File.expand_path('../config/environment', __FILE__)
 require "rack"
 
-# class RootSiteAuth < Rack::Auth::Basic
-#   def call(env)
-#     request = Rack::Request.new(env)
-#     if ['/'].include? request.path
-#       super
-#     else
-#       @app.call(env)
-#     end
-#   end
-# end
-#
-# use RootSiteAuth, "Restricted Area" do |username, password|
-#   [username, password] == ['admin', 'jA7U3e@!']
-# end
 
+class RootSiteAuth < Rack::Auth::Basic
+  def call(env)
+    request = Rack::Request.new(env)
+    if ['/'].include? request.path
+      super
+    else
+      @app.call(env)
+    end
+  end
+end
+
+use RootSiteAuth, "Restricted Area" do |username, password|
+  [username, password] == ['admin', 'admin']
+end
 
 run Rails.application

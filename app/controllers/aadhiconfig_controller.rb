@@ -1,7 +1,4 @@
 class AadhiconfigController < ApplicationController
-
-  before_filter :authenticate
-
   skip_before_filter :verify_authenticity_token
 
   def index
