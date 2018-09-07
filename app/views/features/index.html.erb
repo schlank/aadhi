@@ -1,6 +1,13 @@
 
   <%- model_class = Feature -%>
-  
+  <div><%
+  "KUBE_NAMESPACE: " ENV["KUBE_NAMESPACE"]
+  "AADHI_HOST: " ENV["AADHI_HOST"]
+  "STUB_DIR: " ENV["STUB_DIR"]
+  "STUB_DIR: " ENV["STUB_DIR"]
+  "AADHI_ENV: " ENV["AADHI_ENV"]
+  %>
+  </div>
 <form name="features_export" action="features/export" method="post" onSubmit="if(!confirm('are you sure?')){return false;}">
   <table class="table table-striped" style="align:center">
     <thead>
