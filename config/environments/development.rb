@@ -38,7 +38,7 @@ Rails.application.configure do
 
  #The available log levels are: :debug, :info, :warn, :error, :fatal, and :unknown
  #Using the :debug level will have a greater performance penalty than :fatal, as a far greater number of strings are being evaluated and written to the log output (e.g. disk).
-  config.log_level = :fatal
+  config.log_level = :debug
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
