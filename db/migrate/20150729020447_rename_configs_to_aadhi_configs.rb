@@ -1,5 +1,5 @@
-# class Aadhiconfig < ActiveRecord::Base
-# end
+class Aadhiconfig < ActiveRecord::Base
+end
 
 class RenameConfigsToAadhiConfigs < ActiveRecord::Migration
   def change
