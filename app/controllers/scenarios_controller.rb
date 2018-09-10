@@ -114,8 +114,8 @@ class ScenariosController < ApplicationController
 	def set_current_scenario
 		begin
 		   @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
-       logger.fatal "set_current_scenario::scenario_name #{params[:scenario_name]}"
-       logger.fatal "set_current_scenario::device_id #{params[:device_id]}"
+       # logger.fatal "set_current_scenario::scenario_name #{params[:scenario_name]}"
+       # logger.fatal "set_current_scenario::device_id #{params[:device_id]}"
 		   if @scenario.blank?
 			    flash[:danger] = "An error has been occurred while setting #{params[:scenario_name]} scenario. Please set a valid scenario.  Blank?"
 			    redirect_to '/scenarios/debug'
