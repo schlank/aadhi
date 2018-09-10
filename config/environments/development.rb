@@ -19,6 +19,12 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Disable serving static files from the `/public` folder by default since
+  # Apache or NGINX already handles this.
+  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.assets.compile = true
+  config.serve_static_files = true
+
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
