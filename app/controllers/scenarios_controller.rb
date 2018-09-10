@@ -1,4 +1,5 @@
 class ScenariosController < ApplicationController
+  before_filter :authenticate_user, :except => [:set_current_scenario]
 	skip_before_action :verify_authenticity_token
 
 	def index
