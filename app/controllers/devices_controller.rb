@@ -7,7 +7,7 @@
   class DevicesController < ApplicationController
 
 	use Rack::MethodOverride
-  before_filter :authenticate_user, :except => [:set_scenario]
+  before_filter :authenticate_user, :except => [:set_scenario, :respond_to_app_client]
 	skip_before_filter :verify_authenticity_token
 
     include DevicesHelper
