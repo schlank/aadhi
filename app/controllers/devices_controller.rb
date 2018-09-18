@@ -50,7 +50,7 @@
     end
 
 	def respond_to_app_client
-		log_device_ip
+		log_device_ip "respond_to_app_client"
 		config =  Aadhiconfig.all
 		case config[0].server_mode
 			when SERVER_MODE::REFRESH
@@ -60,8 +60,10 @@
 			else
 				@device = Device.find_by(:device_ip=>get_ip_address)
 				if @device.blank?
+          logger.fatal "respond_to_app_client 404 1"
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
-				else
+        else
+          logger.fatal "respond_to_app_client make_request_to_local_api_server"
 					if @device.isReportRequired=='yes'
 					   make_request_to_local_api_server(true)
 					else
@@ -77,6 +79,7 @@
 	      @configs = Aadhiconfig.all
 	      @configs[0].update(:server_mode=>"default")
 		  @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
+      logger.fatal "set_scenario: #{params[:scenario_name]}"
 		  if @scenario.blank?
 		  		logger.fatal "Invalid scenario: #{params[:scenario_name]} \n"
 		    	render :json => { :status => '404', :message => 'Not Found'}, :status => 404
@@ -104,7 +107,7 @@
 
     private
 	def make_request_to_actual_api(method, config)
-		
+
 	   	host, path, query, body = get_request_details
 	    conn = Connection.new(host, config)
 	    response = ""
@@ -140,7 +143,7 @@
 	private
 	def make_request
 		begin
-			log_device_ip
+			log_device_ip "make_request"
 			@device = Device.find_by(:device_ip=>get_ip_address)
 			if @device.blank?
         logger.fatal "make_request 404 1"
@@ -165,7 +168,7 @@
 	private 
 	def make_request_report
 		begin
-			log_device_ip
+			log_device_ip "make_request_report"
 			@device = DeviceReport.find_by(:device_ip=>get_ip_address)
 			@scenario = @device.device_scenarios.last
 			if @device.blank?
@@ -262,8 +265,8 @@
 		end
 
 	private 
-	    def log_device_ip
-             logger.fatal "Device IP:"+get_ip_address.to_s
+	    def log_device_ip(message)
+             logger.fatal "Device IP:"+get_ip_address.to_s + " message: " + message
 	    end
 end
 
