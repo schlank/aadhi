@@ -143,11 +143,13 @@
 			log_device_ip
 			@device = Device.find_by(:device_ip=>get_ip_address)
 			if @device.blank?
+        logger.fatal "make_request 404 1"
 				log_notfound_request(get_path_query, request.method, get_ip_address)
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
 				@route = @device.find_route(get_path_query, request.method)
 				if @route.blank?
+          logger.fatal "make_request 404 2"
 					log_notfound_request(get_path_query, request.method, get_ip_address, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
@@ -244,6 +246,10 @@
 
 	private 
 		def log_notfound_request(url, method, ip_address, scenario_name="--")
+        logger.fatal "log_notfound_request device_ip: " + :device_ip=>ip_address
+        logger.fatal "log_notfound_request scenario_name:" + :scenario_name=>scenario_name
+        logger.fatal "log_notfound_request :method=>method" + :method=>method
+        logger.fatal "log_notfound_request :url=>url" + :url=>url
 				Notfound.create(:url=>url, :method=>method, :device_ip=>ip_address, :scenario_name=>scenario_name)
 		end
 
