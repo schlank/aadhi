@@ -60,8 +60,8 @@
 			else
 				@device = Device.find_by(:device_ip=>get_ip_address)
 				if @device.blank?
-          logger.fatal "respond_to_app_client 404 1"
-					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
+          log_device_ip "respond_to_app_client 404 Device Blank - Cant find device by device_id."
+					render :json => { :status => '404', :message => 'Device Blank'}, :status => 404
         else
           logger.fatal "respond_to_app_client make_request_to_local_api_server"
 					if @device.isReportRequired=='yes'
@@ -266,7 +266,7 @@
 
 	private 
 	    def log_device_ip(message)
-             logger.fatal "Device IP:"+get_ip_address.to_s + " message: " + message
+             logger.fatal message + "Device IP:"+get_ip_address.to_s
 	    end
 end
 
