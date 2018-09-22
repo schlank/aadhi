@@ -217,6 +217,7 @@
 		    path_array = host_path.split("/")
 		    path_array.delete_at(0)
 		    host = request.env["rack.url_scheme"]+"://"+path_array[0]
+        logger.fatal "host_path: " + host_path
 		    path = get_path(host_path)
 			[host, path, query, body] 
 		end
@@ -226,11 +227,12 @@
 			remote_ip = request.remote_ip
 			if remote_ip==DEFAULT_LOCALHOST
 			 ip_address = LOCALHOST
-       logger.fatal "DEFAULT_LOCALHOST"
+       logger.fatal "DEFAULT_LOCALHOST: " + ip_address
 			else
 			 ip_address = remote_ip
-       logger.fatal "remote_ip"
-			end
+       logger.fatal "remote_ip: " + ip_address
+      end
+      ip_address
 		end
 
 	private 
@@ -239,7 +241,8 @@
 		   	query = request.query_string
 		 	path = get_path(host_path)				
 			sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
-			received_path = sorted_path
+      logger.fatal "sorted_path: " + sorted_path
+      sorted_path
 		end
 
 	private
@@ -253,9 +256,11 @@
 		    final_path = ""
 		    path_array.each do |t|
 		      final_path<<"/"<<t
-		    end
+        end
 			path = final_path.gsub("//","/")
-		end
+      logger.fatal "path: " + path
+      path
+    end
 
 	private 
 		def log_notfound_request(url, method, ip_address, scenario_name="--")
