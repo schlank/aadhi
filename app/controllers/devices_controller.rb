@@ -56,11 +56,11 @@
 			when SERVER_MODE::REFRESH
 			when SERVER_MODE::RECORD
 				method =  request.method
-				make_request_to_actual_api(method,config)  
+				make_request_to_actual_api(method,config)
 			else
 				@device = Device.find_by(:device_ip=>get_ip_address)
 				if @device.blank?
-          log_device_ip "respond_to_app_client 404 Device Blank - Cant find device by device_id."
+          log_device_ip "respond_to_app_client 404 Device Blank - Cant find device by device_ip."
 					render :json => { :status => '404', :message => 'Device Blank'}, :status => 404
         else
           logger.fatal "respond_to_app_client make_request_to_local_api_server"
@@ -79,24 +79,32 @@
 	      @configs = Aadhiconfig.all
 	      @configs[0].update(:server_mode=>"default")
 		  @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
-      logger.fatal "set_scenario: #{params[:scenario_name]}"
+        log_device_ip "set_scenario: #{params[:scenario_name]}"
 		  if @scenario.blank?
-		  		logger.fatal "Invalid scenario: #{params[:scenario_name]} \n"
+          log_device_ip "BLANK SCENARIO!!!!!!!!!!!!\n"
 		    	render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 		  else
 			    @device = Device.find_or_initialize_by(:device_ip=>params[:device_ip])
+          if @device.blank?
+            log_device_ip "BLANK DEVICE!!!!!!!!!!!!! Cant find device by device_ip."
+            render :json => { :status => '404', :message => 'Device Blank'}, :status => 404
+          else
+            log_device_ip "Device found."
+          end
 			    if params[:isReportRequired] == 'yes'
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
-			    	@device_report = DeviceReport.find_or_initialize_by(:device_ip=>params[:device_ip]) 
+			    	@device_report = DeviceReport.find_or_initialize_by(:device_ip=>params[:device_ip])
+            log_device_ip "update scenario. isReportRequired = yes"
 			    	@device_report.update(:device_ip=>params[:device_ip])
 			    	@scenario = @device_report.device_scenarios.create(:scenario_name=>@device.scenario.scenario_name)
 			    	@device.scenario.routes.each do |route|
 			    		@route = @scenario.scenario_routes.create(:path=>route.path, :fixture=>route.fixture, :route_type=>route.route_type, :status=>route.status)
 			    		@route.update(:path=>route.path, :fixture=>route.fixture, :route_type=>route.route_type, :status=>route.status)
 			    	end
-			    else
+          else
+            log_device_ip "update scenario."
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
-			    end
+          end
 					render :json => { :status => 'Ok', :message => 'Received'}, :status => 200 
 		  end
 		rescue =>e
