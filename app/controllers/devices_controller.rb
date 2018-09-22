@@ -94,7 +94,7 @@
 			    if params[:isReportRequired] == 'yes'
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
 			    	@device_report = DeviceReport.find_or_initialize_by(:device_ip=>params[:device_ip])
-            log_device_ip "update scenario. isReportRequired = yes"
+            log_device_ip "update scenario. isReportRequired = "
 			    	@device_report.update(:device_ip=>params[:device_ip])
 			    	@scenario = @device_report.device_scenarios.create(:scenario_name=>@device.scenario.scenario_name)
 			    	@device.scenario.routes.each do |route|
@@ -274,7 +274,7 @@
 
 	private 
 	    def log_device_ip(message)
-             logger.fatal message + "Device IP:"+get_ip_address.to_s
+             logger.fatal message + "    -- Device IP:"+get_ip_address.to_s
 	    end
 end
 
