@@ -226,10 +226,10 @@
 			remote_ip = request.remote_ip
 			if remote_ip==DEFAULT_LOCALHOST
 			 ip_address = LOCALHOST
-        log_device_ip "DEFAULT LOCALHOST"
+       logger.fatal "DEFAULT_LOCALHOST"
 			else
 			 ip_address = remote_ip
-       log_device_ip "remote_ip"
+       logger.fatal "remote_ip"
 			end
 		end
 
