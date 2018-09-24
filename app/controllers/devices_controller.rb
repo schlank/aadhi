@@ -76,10 +76,10 @@
 
 	def set_scenario
 		begin
-	      @configs = Aadhiconfig.all
-	      @configs[0].update(:server_mode=>"default")
-		  @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
-        log_device_id "set_scenario: #{params[:scenario_name]}"
+      @configs = Aadhiconfig.all
+      @configs[0].update(:server_mode=>"default")
+      @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
+      log_device_id "set_scenario: #{params[:scenario_name]}"
 		  if @scenario.blank?
           log_device_id "BLANK SCENARIO!!!!!!!!!!!!\n"
 		    	render :json => { :status => '404', :message => 'Not Found'}, :status => 404
@@ -288,8 +288,8 @@
 		end
 		
 	private
-		def log_device_id
-			logger.fatal "Device Identifier:"+get_id.to_s
+		def log_device_id(message)
+			logger.fatal message + "    - Device Identifier:"+get_id.to_s
     end
 
 end
