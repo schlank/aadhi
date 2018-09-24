@@ -118,7 +118,7 @@ class ScenariosController < ApplicationController
 			    flash[:danger] = "An error has been occurred while setting #{params[:scenario_name]} scenario. Please set a valid scenario"
 			    redirect_to '/scenarios/debug'
 			else
-				@device = Device.find_or_initialize_by(:device_ip=>params[:device_ip])
+				@device = Device.find_or_initialize_by(:device_id=>params[:device_id])
 		  		@device.update(scenario: @scenario)
 		  		flash[:success] = "The selected scenario has been set successfully!!!"
 			    redirect_to '/scenarios/debug'

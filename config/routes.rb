@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post 'scenarios/save_route'=>'scenarios#save_route'
   post 'scenarios/insert_or_update_routes'=>'scenarios#insert_or_update_routes'
   get 'scenarios/revert_marked_scenarios'=>'scenarios#revert_marked_scenarios'
-  put 'scenario/:scenario_name/:device_ip/:isReportRequired' =>'devices#set_scenario',:constraints => { :device_ip => /[0-z\.]+/ }
+  put 'scenario/:scenario_name/:device_id/:isReportRequired' =>'devices#set_scenario',:constraints => { :device_id => /[0-z\-]+/ }
 
 
   get 'stubs/poll_log'=>'stubs#poll_log'
