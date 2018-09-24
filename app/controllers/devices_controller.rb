@@ -290,17 +290,7 @@
 		
 	private
 		def log_device_id(message)
-			logger.fatal message + "    - Device Identifier:"+get_id.to_s
+			logger.fatal message + "    - Device Identifier: " + get_id
     end
 
 end
-
-
-
-
-
-
-
-
-
-
