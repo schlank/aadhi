@@ -182,7 +182,7 @@
 			@device = DeviceReport.find_by(:device_id=>get_id)
 			@scenario = @device.device_scenarios.last
 			if @device.blank?
-				log_notfound_request(get_path_query, request.method, get_device_id)
+				log_notfound_request(get_path_query, request.method, get_id)
         logger.fatal "404 Device Blank 1"
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
