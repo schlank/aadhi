@@ -170,7 +170,7 @@
 				end
 			end
 		rescue =>e
-			logger.fatal "An error has been occurred in respond_to_client #{e.class.name} : #{e.message} \n"
+			logger.fatal "An error has been occurred in make_request #{e.class.name} : #{e.message} \n"
 			render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 		end
 	end
@@ -205,7 +205,7 @@
 				end
 			end
 		rescue =>e
-			logger.fatal "An error has been occurred in respond_to_client #{e.class.name} : #{e.message}\n"
+			logger.fatal "An error has been occurred in make_request_report #{e.class.name} : #{e.message}\n"
       logger.fatal "404 4"
 			render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 		end
@@ -229,10 +229,10 @@
 			remote_ip = request.remote_ip
 			if remote_ip==DEFAULT_LOCALHOST
 			 ip_address = LOCALHOST
-       logger.fatal "DEFAULT_LOCALHOST: " + ip_address
+       logger.fatal "DEFAULT_LOCALHOST: " + ip_address.to_s
 			else
 			 ip_address = remote_ip
-       logger.fatal "remote_ip: " + ip_address
+       logger.fatal "remote_ip: " + ip_address.to_s
       end
       ip_address
 		end
