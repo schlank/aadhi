@@ -157,13 +157,13 @@
 			@device = Device.find_by(:device_id=>get_id)
 			if @device.blank?
         logger.fatal "make_request 404 1"
-				log_notfound_request(get_path_query, request.method, get_ip_address)
+				log_notfound_request(get_path_query, request.method, get_ip_address.to_s)
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
 				@route = @device.find_route(get_path_query, request.method)
 				if @route.blank?
           logger.fatal "make_request 404 2"
-					log_notfound_request(get_path_query, request.method, get_ip_address, @device.scenario.scenario_name)
+					log_notfound_request(get_path_query, request.method, get_ip_address.to_s, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
