@@ -157,13 +157,13 @@
 			@device = Device.find_by(:device_id=>get_id)
 			if @device.blank?
         logger.fatal "make_request 404 1"
-				log_notfound_request(get_path_query, request.method, get_ip_address.to_s)
+				# log_notfound_request(get_path_query, request.method, get_ip_address.to_s)
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
 				@route = @device.find_route(get_path_query, request.method)
 				if @route.blank?
-          logger.fatal "make_request 404 2"
-					log_notfound_request(get_path_query, request.method, get_ip_address.to_s, @device.scenario.scenario_name)
+          logger.fatal "make_request 404: " + get_path_query
+					# log_notfound_request(get_path_query, request.method, get_ip_address.to_s, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
@@ -182,19 +182,19 @@
 			@device = DeviceReport.find_by(:device_id=>get_id)
 			@scenario = @device.device_scenarios.last
 			if @device.blank?
-				log_notfound_request(get_path_query, request.method, get_id.to_s)
+				# log_notfound_request(get_path_query, request.method, get_id.to_s)
         logger.fatal "404 Device Blank 1"
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
 				@route = @scenario.scenario_routes.find_by(:path=>get_path_query, :route_type=>request.method)
 				if @route.blank?
-					log_notfound_request(get_path_query, request.method, get_id.to_s, @scenario.scenario_name)
+					# log_notfound_request(get_path_query, request.method, get_id.to_s, @scenario.scenario_name)
           logger.fatal "404 2"
 					@scenario.scenario_routes.create(:path=>get_path_query, :route_type=>request.method, :count=>-1, :fixture=>"404")
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					if @route.fixture == "404"
-					   log_notfound_request(get_path_query, request.method, get_id.to_s, @scenario.scenario_name)
+					   # log_notfound_request(get_path_query, request.method, get_id.to_s, @scenario.scenario_name)
 					   @route.update(:count=>@route.count-1)
              logger.fatal "404 3"
 					   render :json => { :status => '404', :message => 'Not Found'}, :status => 404
