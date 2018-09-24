@@ -239,7 +239,8 @@
 
 	private
 		def get_id
-      log.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"]
+      logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"]
+      logger.fatal "Hard coded! as unique_device_id"
       id = "unique_device_id"
 		end
 
