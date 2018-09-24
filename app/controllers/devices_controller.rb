@@ -240,8 +240,8 @@
 	private
 		def get_id
       logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
-      logger.fatal "Hard coded! as unique_device_id"
-      id = "unique_device_id"
+      logger.fatal "Hard coded! as philsdevice"
+      id = "philsdevice"
 		end
 
 	private 
