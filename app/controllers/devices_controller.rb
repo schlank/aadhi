@@ -155,6 +155,7 @@
 		begin
 			log_device_id "make_request"
 			@device = Device.find_by(:device_id=>get_id)
+      logger.fatal "Scenario Name: " + @device.scenario.scenario_name
 			if @device.blank?
         logger.fatal "make_request 404 1"
 				# log_notfound_request(get_path_query, request.method, get_ip_address.to_s)
