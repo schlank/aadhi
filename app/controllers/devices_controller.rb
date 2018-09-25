@@ -161,6 +161,7 @@
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 			else
 				@route = @device.find_route(get_path_query, request.method)
+        # TODO THIS returns a blank route
 				if @route.blank?
           logger.fatal "make_request 404: " + get_path_query
 					# log_notfound_request(get_path_query, request.method, get_ip_address.to_s, @device.scenario.scenario_name)
