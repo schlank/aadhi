@@ -241,8 +241,8 @@
 
 	private
 		def get_id
-      logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
-      logger.fatal "Hard coded! as philsdevice"
+      # logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
+      # logger.fatal "Hard coded! as philsdevice"
       id = "philsdevice"
 		end
 
@@ -251,11 +251,11 @@
 			host_path = request.host + request.path
 		   	query = request.query_string
 		 	path = get_path(host_path)
-      logger.fatal "host_path: " + host_path
-      logger.fatal "path: " + path
+      # logger.fatal "host_path: " + host_path
+      # logger.fatal "path: " + path
+      # # logger.fatal "sorted_path: " + sorted_path
+      #       # sorted_path
 			sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
-      logger.fatal "sorted_path: " + sorted_path
-      sorted_path
 		end
 
 	private
