@@ -241,9 +241,8 @@
 
 	private
 		def get_id
-      # logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
-      # logger.fatal "Hard coded! as philsdevice"
-      id = "philsdevice"
+      logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
+      id = request.headers["aadhi-identifier"]
 		end
 
 	private 
