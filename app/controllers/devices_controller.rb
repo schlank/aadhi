@@ -135,8 +135,8 @@
 		}
 		t.join
 		headers = t.value[1]
-    logger.fatal "aadhi_identifier:- " + headers["aadhi_identifier"]
-		headers.delete("aadhi_identifier")
+    logger.fatal "HTTP_AADHI_IDENTIFIER:- " + headers["HTTP_AADHI_IDENTIFIER"]
+		headers.delete("HTTP_AADHI_IDENTIFIER")
 		t.value[1] = headers
 		save_stubs(host+path<<"?"<<query, method, body, t.value[0], host, request, t.value[1].to_hash)
 		render json: t.value[0].body, :status => t.value[0].code, content_type: t.value[1]['accept'][0]
@@ -243,10 +243,10 @@
 
 	private
 		def get_id
-      logger.fatal "aadhi_identifier" + request.headers["aadhi_identifier"].to_s
+      logger.fatal "HTTP_AADHI_IDENTIFIER" + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
       logger.fatal "request.headers" + request.headers.inspect
       logger.fatal "request" + request.inspect
-      id = request.headers["aadhi_identifier"]
+      id = request.headers["HTTP_AADHI_IDENTIFIER"]
 		end
 
 	private 
