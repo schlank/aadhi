@@ -244,9 +244,6 @@
 	private
 		def get_id
       logger.fatal "aadhi_identifier" + request.headers["aadhi_identifier"].to_s
-      request.headers.each {
-        logger.fatal "key: " + key + " value: " + value
-      }
       logger.fatal "request.headers" + request.headers.inspect
       logger.fatal "request" + request.inspect
       id = request.headers["aadhi_identifier"]
