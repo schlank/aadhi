@@ -242,6 +242,8 @@
 
 	private
 		def get_id
+      logger.fatal "aadhi_identifier" + request.headers["aadhi_identifier"].to_s
+      logger.fatal "aadhi_identifier" + request.headers.inspect
       id = request.headers["aadhi_identifier"]
 		end
 
