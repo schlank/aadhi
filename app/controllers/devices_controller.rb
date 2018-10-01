@@ -3,6 +3,7 @@
 	require 'json'
 	require "net/http"
 	require "uri"
+  require "addressable/uri"
 
   class DevicesController < ApplicationController
 
@@ -253,7 +254,15 @@
       # logger.fatal "path: " + path
       # # logger.fatal "sorted_path: " + sorted_path
       #       # sorted_path
-			sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
+      # http://localhost is only a placeholder for sort_query_parameters
+      sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
+
+      # TODO uncomment these and try in Android.
+      # sorted_path = sorted_path.gsub(/&from.*$/, "")
+      # sorted_path = sorted_path.gsub(/authinit?.*$/, "")
+      # sorted_path = sorted_path.gsub(/&verifier=.*$/, "")
+
+      received_path = sorted_path
 		end
 
 	private

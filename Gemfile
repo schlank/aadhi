@@ -28,6 +28,8 @@ gem 'bootstrap-sass'
 #memory caching
 gem 'dalli'
 
+#Utils
+gem 'addressable'
 
 group :development, :test do
  
