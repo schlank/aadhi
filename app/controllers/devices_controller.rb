@@ -241,7 +241,6 @@
 
 	private
 		def get_id
-      logger.fatal "get_id aadhi-identifier: " + request.headers["aadhi-identifier"].to_s
       id = request.headers["aadhi-identifier"]
 		end
 
@@ -293,7 +292,7 @@
 		
 	private
 		def log_device_id(message)
-			logger.fatal message + "    - Device Identifier: " + get_id
+			logger.fatal message + "    - Device Identifier: " + get_id.to_s
     end
 
 end
