@@ -242,7 +242,7 @@
 
 	private
 		def get_id
-      id = request.headers["aadhi-identifier"]
+      id = request.headers["aadhi_identifier"]
 		end
 
 	private 
