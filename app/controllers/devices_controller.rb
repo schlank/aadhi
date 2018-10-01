@@ -135,6 +135,7 @@
 		}
 		t.join
 		headers = t.value[1]
+    logger.fatal "aadhi_identifier:- " + headers["aadhi_identifier"]
 		headers.delete("aadhi_identifier")
 		t.value[1] = headers
 		save_stubs(host+path<<"?"<<query, method, body, t.value[0], host, request, t.value[1].to_hash)
@@ -243,6 +244,9 @@
 	private
 		def get_id
       logger.fatal "aadhi_identifier" + request.headers["aadhi_identifier"].to_s
+      request.headers.each {
+        logger.fatal "key: " + key + " value: " + value
+      }
       logger.fatal "request.headers" + request.headers.inspect
       logger.fatal "request" + request.inspect
       id = request.headers["aadhi_identifier"]
