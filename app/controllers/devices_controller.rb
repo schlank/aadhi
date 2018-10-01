@@ -255,7 +255,9 @@
       # # logger.fatal "sorted_path: " + sorted_path
       #       # sorted_path
       # http://localhost is only a placeholder for sort_query_parameters
-      sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
+      addressable_uri = Addressable::URI.parse("http://localhost"+path+"?"+query)
+      addressable_uri.delete("sessionId")
+      sorted_path = sort_query_parameters(addressable_uri.to_s)
 
       # TODO uncomment these and try in Android.
       # sorted_path = sorted_path.gsub(/&from.*$/, "")
