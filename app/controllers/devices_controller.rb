@@ -246,7 +246,7 @@
       logger.fatal "HTTP_AADHI_IDENTIFIER: " + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
       logger.fatal "request.headers" + request.headers.inspect
       logger.fatal "request" + request.inspect
-      id = request.headers["HTTP_AADHI_IDENTIFIER"]
+      id = request.headers["HTTP_AADHI_IDENTIFIER"].to_s
 		end
 
 	private 
@@ -261,7 +261,7 @@
       # http://localhost is only a placeholder for sort_query_parameters
       addressable_uri = Addressable::URI.parse("http://localhost"+path+"?"+query)
       params = addressable_uri.query_values
-      params.delete("sessionId")
+      params.delete("session_id")
       addressable_uri.query_values = params
       sorted_path = sort_query_parameters(addressable_uri.to_s)
 
