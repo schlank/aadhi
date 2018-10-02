@@ -167,7 +167,8 @@
         # TODO THIS returns a blank route
 				if @route.blank?
           logger.fatal "make_request 404: " + get_path_query
-					log_notfound_request(get_path_query, request.method, get_id, @device.scenario.scenario_name)
+					# log_notfound_request(get_path_query, request.method, get_id, @device.scenario.scenario_name)
+          logger.fatal "string problem is here."
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
@@ -263,14 +264,14 @@
       params.delete("latitude")
       params.delete("longitude")
       addressable_uri.query_values = params
-      sorted_path = sort_query_parameters(addressable_uri.to_s).to_s
+      sorted_path = sort_query_parameters(addressable_uri.to_s)
 
       # TODO uncomment these and try in Android.
       # sorted_path = sorted_path.gsub(/&from.*$/, "")
       # sorted_path = sorted_path.gsub(/authinit?.*$/, "")
       # sorted_path = sorted_path.gsub(/&verifier=.*$/, "")
 
-      received_path = sorted_path
+      received_path = sorted_path.to_s
 		end
 
 	private
