@@ -263,7 +263,7 @@
       params.delete("latitude")
       params.delete("longitude")
       addressable_uri.query_values = params
-      sorted_path = sort_query_parameters(addressable_uri.to_s)
+      sorted_path = sort_query_parameters(addressable_uri.to_s).to_s
 
       # TODO uncomment these and try in Android.
       # sorted_path = sorted_path.gsub(/&from.*$/, "")
