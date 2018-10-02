@@ -243,7 +243,7 @@
 
 	private
 		def get_id
-      logger.fatal "HTTP_AADHI_IDENTIFIER" + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
+      logger.fatal "HTTP_AADHI_IDENTIFIER: " + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
       logger.fatal "request.headers" + request.headers.inspect
       logger.fatal "request" + request.inspect
       id = request.headers["HTTP_AADHI_IDENTIFIER"]
@@ -260,7 +260,9 @@
       #       # sorted_path
       # http://localhost is only a placeholder for sort_query_parameters
       addressable_uri = Addressable::URI.parse("http://localhost"+path+"?"+query)
-      addressable_uri.delete("sessionId")
+      params = addressable_uri.query_values
+      params.delete("sessionId")
+      addressable_uri.query_values = params
       sorted_path = sort_query_parameters(addressable_uri.to_s)
 
       # TODO uncomment these and try in Android.
