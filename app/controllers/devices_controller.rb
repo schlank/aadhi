@@ -244,8 +244,6 @@
 	private
 		def get_id
       logger.fatal "HTTP_AADHI_IDENTIFIER: " + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
-      logger.fatal "request.headers" + request.headers.inspect
-      logger.fatal "request" + request.inspect
       id = request.headers["HTTP_AADHI_IDENTIFIER"].to_s
 		end
 
@@ -262,6 +260,8 @@
       addressable_uri = Addressable::URI.parse("http://localhost"+path+"?"+query)
       params = addressable_uri.query_values
       params.delete("session_id")
+      params.delete("latitude")
+      params.delete("longitude")
       addressable_uri.query_values = params
       sorted_path = sort_query_parameters(addressable_uri.to_s)
 
@@ -286,8 +286,6 @@
 		      final_path<<"/"<<t
         end
 			path = final_path.gsub("//","/")
-      logger.fatal "path: " + path
-      path
     end
 
 	private 
@@ -309,7 +307,7 @@
 		
 	private
 		def log_device_id(message)
-			logger.fatal message + "    - Device Identifier: " + get_id.to_s
+			logger.fatal message + " - get_id: " + get_id
     end
 
 end
