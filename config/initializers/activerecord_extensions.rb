@@ -28,7 +28,8 @@ module AadhiModelUtil
     params.delete("verifier")
     uri.query_values = params
     # return path with remaining parameters
-    uri.path+"?"<<uri.query
+    query_params=uri.path+"?"+uri.query
+    query_params.to_s
   end
 
 	def sort_query_parameters(url)
