@@ -3,7 +3,6 @@
 	require 'json'
 	require "net/http"
 	require "uri"
-  require "addressable/uri"
 
   class DevicesController < ApplicationController
 
