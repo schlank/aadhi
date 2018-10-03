@@ -1,6 +1,8 @@
 
 module FeaturesHelper
 
+  include AadhiModelUtil
+
 	def store_xml(file)
 		directory ="public"
 		path = File.join(directory,file['datafile'].original_filename)
