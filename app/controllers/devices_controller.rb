@@ -167,7 +167,7 @@
         # TODO THIS returns a blank route
 				if @route.blank?
           logger.fatal "make_request 404: " + get_path_query
-					log_notfound_request(get_path_query.to_s, request.method, get_id.to_s, @device.scenario.scenario_name)
+					# log_notfound_request(get_path_query.to_s, request.method, get_id.to_s, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
