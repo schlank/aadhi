@@ -20,7 +20,7 @@ module AadhiModelUtil
   # The urls with these params return 404 when they do not match a stub.
   def prune_query_parameters(path_with_query)
     # // Localhost is just added as a placeholder.
-    uri = Addressable::URI.parse("http://localhost"+path_with_query)
+    uri = Addressable::URI.parse("http://localhost"+path_with_query.to_s)
     params = uri.query_values
     params.delete("session_id")
     params.delete("latitude")
@@ -28,8 +28,7 @@ module AadhiModelUtil
     params.delete("verifier")
     uri.query_values = params
     # return path with remaining parameters
-    query_params=uri.path+"?"+uri.query
-    query_params.to_s
+    uri.path+"?"+uri.query
   end
 
 	def sort_query_parameters(url)
