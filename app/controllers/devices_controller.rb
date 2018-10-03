@@ -167,8 +167,7 @@
         # TODO THIS returns a blank route
 				if @route.blank?
           logger.fatal "make_request 404: " + get_path_query
-					# log_notfound_request(get_path_query, request.method, get_id, @device.scenario.scenario_name)
-          logger.fatal "string problem is here."
+					log_notfound_request(get_path_query.to_s, request.method, get_id.to_s, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
@@ -251,29 +250,19 @@
 	private 
 		def get_path_query
 			host_path = request.host + request.path
-		   	query = request.query_string
+      query = request.query_string
 		 	path = get_path(host_path)
-      # logger.fatal "host_path: " + host_path
-      # logger.fatal "path: " + path
-      # # logger.fatal "sorted_path: " + sorted_path
-      #       # sorted_path
-      # http://localhost is only a placeholder for sort_query_parameters
-      addressable_uri = Addressable::URI.parse("http://localhost"+path+"?"+query)
-      params = addressable_uri.query_values
-      params.delete("session_id")
-      params.delete("latitude")
-      params.delete("longitude")
-      addressable_uri.query_values = params
-      sorted_path = sort_query_parameters(addressable_uri.to_s)
 
-      # TODO uncomment these and try in Android.
-      # sorted_path = sorted_path.gsub(/&from.*$/, "")
-      # sorted_path = sorted_path.gsub(/authinit?.*$/, "")
-      # sorted_path = sorted_path.gsub(/&verifier=.*$/, "")
+      # Remove dynamic parameters
+      pruned_path = prune_query_parameters(path+"?"+query)
+
+      # Sort the parameters
+      sorted_path = sort_query_parameters(pruned_path)
 
       received_path = sorted_path.to_s
-		end
+    end
 
+  #TODO use the Addressable Gem instead
 	private
 		def get_path(host_path)
 			path_array = host_path.split("/")

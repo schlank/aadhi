@@ -13,7 +13,22 @@ module AadhiModelUtil
 		    end
 		  end
 		  keyvals
-	end
+  end
+
+  # Removed parameters that are generated or dynamic (but not required)
+  # The urls with these params return 404 when they do not match a stub.
+  def prune_query_parameters(path_with_query)
+    # // Localhost is just added as a placeholder.
+    uri = Addressable::URI.parse("http://localhost"+path_with_query)
+    params = uri.query_values
+    params.delete("session_id")
+    params.delete("latitude")
+    params.delete("longitude")
+    params.delete("verifier")
+    uri.query_values = params
+    # return path with remaining parameters
+    uri.path+"?"<<uri.query
+  end
 
 	def sort_query_parameters(url)
     	temp_url = URI.parse(url)
