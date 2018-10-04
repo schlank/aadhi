@@ -29,6 +29,7 @@ module AadhiModelUtil
       params.delete("longitude")
       params.delete("verifier")
       uri.query_values = params
+      uri = uri.unencode_component(uri, Addressable::URI)
       logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
       uri.path+"?"+uri.query
     else
