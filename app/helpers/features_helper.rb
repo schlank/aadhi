@@ -23,7 +23,7 @@ module FeaturesHelper
 					scenarios.update(:scenario_name=>(scenario/'./scenario-name').text)
 	
 			    	(scenario/'routes/route').each {|route|
-			    		route_path = prune_query_parameters(route/'./path'.content)
+			    		route_path = prune_query_parameters(route/'./path'.text)
               routes = scenarios.routes.find_or_initialize_by(:path=>route_path, :route_type=>(route/'./route-type').text)
 						routes.update(:route_type=>(route/'./route-type').text,:path=>route_path,:request_body=>(route/'./request-body').text,:fixture=>(route/'./fixture').text,:status=>(route/'./status').text,:host=>(route/'./host').text)
 
