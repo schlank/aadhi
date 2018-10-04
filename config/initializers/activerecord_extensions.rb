@@ -23,13 +23,17 @@ module AadhiModelUtil
     logger.fatal "path_with_query: " + path_with_query.to_s
     uri = Addressable::URI.parse("http://localhost"+path_with_query.to_s)
     params = uri.query_values
-    params.delete("session_id")
-    params.delete("latitude")
-    params.delete("longitude")
-    params.delete("verifier")
-    uri.query_values = params
+    if params!=nil && params!='' || !params.blank?
+      params.delete("session_id")
+      params.delete("latitude")
+      params.delete("longitude")
+      params.delete("verifier")
+      uri.query_values = params
+      uri.path+"?"+uri.query
+    else
+      uri.path
+    end
     # return path with remaining parameters
-    uri.path+"?"+uri.query
   end
 
 	def sort_query_parameters(url)
