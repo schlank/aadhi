@@ -22,7 +22,7 @@ module FeaturesHelper
 					scenarios.update(:scenario_name=>(scenario/'./scenario-name').text)
 	
 			    	(scenario/'routes/route').each {|route|
-              logger.fatal ":path=>(route/'./path').text" + :path=>(route/'./path').text.to_s
+              logger.fatal ":path=>(route/'./path').text" + :path=>(route/'./path').to_s
               logger.fatal "route/'./path'" + route/'./path'.to_s
               logger.fatal ":path=>(route/'./path')" + :path=>(route/'./path').to_s
               route_path = prune_query_parameters(:path=>(route/'./path').text.to_s)
