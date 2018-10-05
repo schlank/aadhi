@@ -258,6 +258,11 @@
       # Sort the parameters
       sorted_path = sort_query_parameters(pruned_path)
 
+      # iOS specific URLs truncated
+      sorted_path = sorted_path.gsub(/&from.*$/, "")
+      sorted_path = sorted_path.gsub(/authinit?.*$/, "")
+      sorted_path = sorted_path.gsub(/&verifier=.*$/, "")
+
       received_path = sorted_path.to_s
     end
 
