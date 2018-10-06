@@ -34,7 +34,7 @@ module AadhiModelUtil
       # logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
       uri.path+"?"+uri.query
     else
-      logger.fatal "uri.path: " + uri.path.to_s
+      logger.fatal "no params uri.path: " + uri.path.to_s
       uri.path
     end
   end
