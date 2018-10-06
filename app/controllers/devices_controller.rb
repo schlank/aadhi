@@ -77,6 +77,7 @@
 	def set_scenario
 		begin
       log_device_id "set_scenario: #{params[:scenario_name]}"
+      log_device_id "device_id: #{params[:device_id]}"
       @configs = Aadhiconfig.all
       @configs[0].update(:server_mode=>"default")
       @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
@@ -89,7 +90,7 @@
             log_device_id "BLANK DEVICE!!!!!!!!!!!!! Cant find device by device_id."
             render :json => { :status => '404', :message => 'Device Blank'}, :status => 404
           else
-            log_device_id "Device found."
+            log_device_id "Device found. #{params[:device_id]}"
           end
 			    if params[:isReportRequired] == 'yes'
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
@@ -102,7 +103,7 @@
 			    		@route.update(:path=>route.path, :fixture=>route.fixture, :route_type=>route.route_type, :status=>route.status)
 			    	end
           else
-            log_device_id "update scenario."
+            log_device_id "update scenario. device_id: #{params[:device_id]} scenario_name: #{params[:scenario_name]}"
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
           end
 					render :json => { :status => 'Ok', :message => 'Received'}, :status => 200 
@@ -166,7 +167,7 @@
         # TODO THIS returns a blank route
 				if @route.blank?
           logger.fatal "make_request 404: " + get_path_query
-					# log_notfound_request(get_path_query.to_s, request.method, get_id.to_s, @device.scenario.scenario_name)
+					log_notfound_request(get_path_query, request.method, get_id, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
 					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
@@ -284,10 +285,15 @@
 
 	private 
 		def log_notfound_request(url, method, device_id, scenario_name="--")
+        logger.fatal "0"
         logger.fatal "log_notfound_request device_id: " + :device_id=>device_id
+        logger.fatal "1"
         logger.fatal "log_notfound_request scenario_name:" + :scenario_name=>scenario_name
+        logger.fatal "2"
         logger.fatal "log_notfound_request :method=>method" + :method=>method
+        logger.fatal "3"
         logger.fatal "log_notfound_request :url=>url" + :url=>url
+        logger.fatal "4"
 				Notfound.create(:url=>url, :method=>method, :device_id=>device_id, :scenario_name=>scenario_name)
 		end
 
