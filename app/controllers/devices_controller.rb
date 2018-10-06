@@ -286,14 +286,13 @@
 	private 
 		def log_notfound_request(url, method, device_id, scenario_name="--")
         logger.fatal "0"
-        device_id_string = device_id.to_s
-        logger.fatal "log_notfound_request device_id: " + device_id_string
+        logger.fatal "log_notfound_request device_id: " + device_id.to_s
         logger.fatal "1"
-        logger.fatal "log_notfound_request scenario_name:" + :scenario_name=>scenario_name
+        logger.fatal "log_notfound_request scenario_name:" + scenario_name.to_s
         logger.fatal "2"
-        logger.fatal "log_notfound_request :method=>method" + :method=>method
+        logger.fatal "log_notfound_request method" + method.to_s
         logger.fatal "3"
-        logger.fatal "log_notfound_request :url=>url" + :url=>url
+        logger.fatal "log_notfound_request url" + url.to_s
         logger.fatal "4"
 				Notfound.create(:url=>url, :method=>method, :device_id=>device_id, :scenario_name=>scenario_name)
 		end
