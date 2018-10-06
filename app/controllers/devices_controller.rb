@@ -286,7 +286,8 @@
 	private 
 		def log_notfound_request(url, method, device_id, scenario_name="--")
         logger.fatal "0"
-        logger.fatal "log_notfound_request device_id: " + :device_id=>device_id
+        device_id_string = device_id.to_s
+        logger.fatal "log_notfound_request device_id: " + device_id_string
         logger.fatal "1"
         logger.fatal "log_notfound_request scenario_name:" + :scenario_name=>scenario_name
         logger.fatal "2"
