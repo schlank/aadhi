@@ -18,15 +18,15 @@
     </div>
     <div class="report-treeview">
         <%@device_list.each do |device|%>
-          <ul class="device-ip">
+          <ul class="device-id">
               <li>
                   <table class="table" >
                       <tr>
                           <td width="70%" style="padding-bottom: 0px">
-                            <a  id="<%=device.id%>"> <%=device.device_ip%></a>
+                            <a  id="<%=device.id%>"> <%=device.device_id%></a>
                           </td>
                         <td width="30%" style="padding-bottom: 0px">
-                          <a data-confirm="Are you sure?" class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/report/delete_report/?device_ip=<%=device.device_ip%>">Delete</a>
+                          <a data-confirm="Are you sure?" class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/report/delete_report/?device_id=<%=device.device_id%>">Delete</a>
                         </td>
                       </tr>
                       <tr>
@@ -49,13 +49,13 @@
 <script type="text/javascript">
   scenarios_by_device_url = '/report/scenarios_by_device';
   $(document).ready(function(){
-      $('.report-treeview .device-ip a').click(function(){
+      $('.report-treeview .device-id a').click(function(){
         device_id = this.id;
         $("#indicator-"+device_id).css("display","block")
         $flag = $(".report-treeview #device-scenario-"+device_id).is(':visible');
         if($flag){
           $("#indicator-"+device_id).css("display","none")
-          $(".report-treeview .device-ip #device-scenario-"+device_id).hide();
+          $(".report-treeview .device-id #device-scenario-"+device_id).hide();
         }else{
             $.ajax({
               url: scenarios_by_device_url+"?device_id="+device_id,

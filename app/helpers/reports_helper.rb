@@ -10,13 +10,13 @@ module ReportsHelper
 
       ( xdoc/'/device-reports/device-report' ).each {|report|
 
-        device = DeviceReport.where(:device_ip=>(report/'./device-ip').text)
+        device = DeviceReport.where(:device_id=>(report/'./device-id').text)
 
         unless device.blank?
           device[0].destroy
         end
 
-        device_report_model= DeviceReport.create(:device_ip=>(report/'./device-ip').text)
+        device_report_model= DeviceReport.create(:device_id=>(report/'./device-d').text)
 
         (report/'device-scenarios/device-scenario').each {|scenario|
           scenario_model =  device_report_model.device_scenarios.create(:scenario_name=>(scenario/'./scenario-name').text)

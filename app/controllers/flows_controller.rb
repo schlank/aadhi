@@ -36,7 +36,7 @@ class FlowsController < ApplicationController
 		begin
 			@feature = Feature.find(params[:feature_id])
 			@flow = @feature.flows.find(params[:id])
-			@device_ip = request.remote_ip
+			@device_id = request.remote_ip
 		rescue=>e
 			flash[:danger] = "An error has been occurred while retrieving the flow #{e.class.name}: #{e.message}"
 			redirect_to feature_path(@feature)
