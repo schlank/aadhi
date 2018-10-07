@@ -30,6 +30,7 @@ module AadhiModelUtil
       params.delete("verifier")
       params.delete("nearStoreNumbers")
       params.delete("shopper_id")
+      params.delete("miles")
       uri.query_values = params
       uri = Addressable::URI.unencode(uri,Addressable::URI)
       logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
