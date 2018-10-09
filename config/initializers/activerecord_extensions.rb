@@ -37,8 +37,10 @@ module AadhiModelUtil
       uri.query_values = params
       uri = Addressable::URI.unencode(uri,Addressable::URI)
       encoded_params = uri.query_values
-      encoded_params["filterby"] = URI::encode(encoded_params["filterby"])
-      uri.query_values = encoded_params
+      if encoded_params["filterby"]!=nil && encoded_params["filterby"]!='' && !encoded_params["filterby"].blank?
+        encoded_params["filterby"] = URI::encode(encoded_params["filterby"])
+        uri.query_values = encoded_params
+      end
       logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
       uri.path+"?"+uri.query
     else
