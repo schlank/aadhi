@@ -22,19 +22,18 @@ module AadhiModelUtil
     logger.fatal "path_with_query: " + path_with_query.to_s
     # Localhost is just added as a placeholder.
     uri = Addressable::URI.parse("http://localhost"+path_with_query.to_s)
-    params = uri.query_values
-    if params!=nil && params!='' && !params.blank?
-      params.delete("session_id")
-      params.delete("latitude")
-      params.delete("longitude")
-      params.delete("verifier")
-      params.delete("nearStoreNumbers")
-      params.delete("shopper_id")
-      params.delete("placement")
-      params.delete("bound")
-      params.delete("miles")
-      uri.query_values = params
+    if uri.query_values!=nil && uri.query_values!='' && !uri.query_values.blank?
+      uri.query_values.delete("session_id")
+      uri.query_values.delete("latitude")
+      uri.query_values.delete("longitude")
+      uri.query_values.delete("verifier")
+      uri.query_values.delete("nearStoreNumbers")
+      uri.query_values.delete("shopper_id")
+      uri.query_values.delete("placement")
+      uri.query_values.delete("bound")
+      uri.query_values.delete("miles")
       uri = Addressable::URI.unencode(uri,Addressable::URI)
+      uri.query_values["filterby"] = URI::encode(uri.query_values["filterby"])
       logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
       uri.path+"?"+uri.query
     else
