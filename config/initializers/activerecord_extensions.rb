@@ -33,7 +33,6 @@ module AadhiModelUtil
       params.delete("placement")
       params.delete("bound")
       params.delete("miles")
-      params["filterby"] =
       uri.query_values = params
       uri = Addressable::URI.unencode(uri,Addressable::URI)
       encoded_params = uri.query_values
