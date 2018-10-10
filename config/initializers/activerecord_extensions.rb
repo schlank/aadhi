@@ -33,14 +33,9 @@ module AadhiModelUtil
       params.delete("placement")
       params.delete("bound")
       params.delete("miles")
-      uri = Addressable::URI.unencode(uri,Addressable::URI)
-      filterby_param = params["filterby"]
-      if filterby_param!=nil && filterby_param!='' && !filterby_param.blank?
-        params["filterby"] = filterby_param.gsub ' ', '%20'
-      end
       uri.query_values = params
       logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
-      uri.path+"?"+uri.query
+      uri.path+"?"+ URI.unescape(uri.query)
     else
       logger.fatal "no params uri.path: " + uri.path.to_s
       uri.path

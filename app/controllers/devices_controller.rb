@@ -243,7 +243,7 @@
 
 	private
 		def get_id
-      logger.fatal "HTTP_AADHI_IDENTIFIER: " + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
+      # logger.fatal "HTTP_AADHI_IDENTIFIER: " + request.headers["HTTP_AADHI_IDENTIFIER"].to_s
       id = request.headers["HTTP_AADHI_IDENTIFIER"].to_s
 		end
 
