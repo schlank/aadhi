@@ -264,7 +264,7 @@
       # sorted_path = sorted_path.gsub(/authinit?.*$/, "")
       # sorted_path = sorted_path.gsub(/&verifier=.*$/, "")
 
-      received_path = sorted_path.to_s
+      received_path = sorted_path
     end
 
   #TODO use the Addressable Gem instead
