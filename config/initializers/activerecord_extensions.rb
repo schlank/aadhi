@@ -34,7 +34,7 @@ module AadhiModelUtil
       params.delete("bound")
       params.delete("miles")
       uri.query_values = params
-      logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + uri.query
+      logger.fatal "uri.path+?+uri.query: " + uri.path+"?" + URI.unescape(uri.query)
       uri.path+"?"+ URI.unescape(uri.query)
     else
       logger.fatal "no params uri.path: " + uri.path.to_s
