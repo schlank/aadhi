@@ -53,6 +53,7 @@ module AadhiModelUtil
         params.delete("longitude")
         params.delete("verifier")
         params.delete("nearStoreNumbers")
+        params.delete("storenumbers")
         params.delete("shopper_id")
         params.delete("placement")
         params.delete("bound")
