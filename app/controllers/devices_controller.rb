@@ -253,11 +253,8 @@
       query = request.query_string
 		 	path = get_path(host_path)
 
-      # Remove dynamic parameters
-      pruned_path = prune_query_parameters(path+"?"+query)
-
       # Sort the parameters
-      sorted_path = sort_query_parameters(pruned_path)
+      sorted_path = sort_query_parameters("http://localhost"+path+"?"+query)
 
       # iOS specific URLs truncated
       # sorted_path = sorted_path.gsub(/&from.*$/, "")
@@ -285,15 +282,12 @@
 
 	private 
 		def log_notfound_request(url, method, device_id, scenario_name="--")
-        logger.fatal "0"
-        logger.fatal "log_notfound_request device_id: " + device_id.to_s
-        logger.fatal "1"
-        logger.fatal "log_notfound_request scenario_name:" + scenario_name.to_s
-        logger.fatal "2"
-        logger.fatal "log_notfound_request method" + method.to_s
-        logger.fatal "3"
-        logger.fatal "log_notfound_request url" + url.to_s
-        logger.fatal "4"
+        logger.fatal "--------------------------------"
+        logger.fatal "device_id: " + device_id.to_s
+        logger.fatal "scenario_name:" + scenario_name.to_s
+        logger.fatal "method: " + method.to_s
+        logger.fatal "url: " + url.to_s
+        logger.fatal "--------------------------------"
 				Notfound.create(:url=>url, :method=>method, :device_id=>device_id, :scenario_name=>scenario_name)
 		end
 
