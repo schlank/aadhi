@@ -48,16 +48,15 @@ module AadhiModelUtil
       # Removed parameters that are generated or dynamic (but not required)
       # The urls with these params return 404 when they do not match a stub.
       if params!=nil && params!='' && !params.blank?
-        params.delete("session_id")
-        params.delete("latitude")
-        params.delete("longitude")
-        params.delete("verifier")
-        params.delete("nearStoreNumbers")
-        params.delete("storenumbers")
-        params.delete("shopper_id")
-        params.delete("placement")
-        params.delete("bound")
-        params.delete("miles")
+        # params.delete("session_id")
+        # params.delete("latitude")
+        # params.delete("longitude")
+        # params.delete("verifier")
+        # params.delete("nearStoreNumbers")
+        # params.delete("shopper_id")
+        # params.delete("placement")
+        # params.delete("bound")
+        # params.delete("miles")
         uri.query_values = params
         uri.path+"?"+ URI.unescape(uri.query)
       else
