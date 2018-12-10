@@ -3,12 +3,12 @@ class NotfoundController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-     @notfound_list = Notfound.pluck(:device_ip).uniq
+     @notfound_list = Notfound.pluck(:device_id).uniq
   end
 
   def notfound_list
-      unless params[:device_ip].nil? || params[:device_ip].blank?
-          @notfound_list = Notfound.find_notfound_requests(params[:device_ip]) 
+      unless params[:device_id].nil? || params[:device_id].blank?
+          @notfound_list = Notfound.find_notfound_requests(params[:device_id])
       end
       render layout: false
   end

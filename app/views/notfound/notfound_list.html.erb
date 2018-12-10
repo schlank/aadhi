@@ -3,7 +3,7 @@
 		<thead>
 			<tr>
 				<th>
-					Device IP
+					Device ID
 				</th>
 				<th>
 					Scenario Name
@@ -22,7 +22,7 @@
 				<%@notfound_list.each do |notfound|%>
 					<tr>
 						<td>
-							<%=notfound.device_ip%>
+							<%=notfound.device_id%>
 						</td>
 						<td style="word-break: break-all;">
 							<%=notfound.scenario_name%>

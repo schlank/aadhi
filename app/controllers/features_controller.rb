@@ -130,7 +130,7 @@ class FeaturesController < ApplicationController
 				render 'import_xml_index'
 			end
 		rescue=>e
-				flash.now[:danger] = "An error has been occurred while importing the stubs!!!"
+				flash.now[:danger] = "An error has been occurred while importing the stubs!!! #{e.class.name}: #{e.message}"
 				render 'import_xml_index'
 		end
 	end

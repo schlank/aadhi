@@ -8,10 +8,10 @@
     <a  class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/notfound/clear_notfound_list">Clear log</a>
   </div> <br>
   <div class="form-group" >
-      <input type="text" class="form-control" id="device_ip" name="device_ip" list="device_ips" autocomplete="off" placeholder="Select device IP" style="display: inline-block; width:90%"> 
-       <datalist id="device_ips">
-          <%@notfound_list.each do |device_ip|%>
-            <option value="<%=device_ip%>">
+      <input type="text" class="form-control" id="device_id" name="device_id" list="device_ids" autocomplete="off" placeholder="Select device ID" style="display: inline-block; width:90%">
+       <datalist id="device_ids">
+          <%@notfound_list.each do |device_id|%>
+            <option value="<%=device_id%>">
           <%end%>
         </datalist>
         <img id="refresh"  style="width:2.5%" src="/assets/refresh.png">
@@ -30,10 +30,10 @@
      var data_length=0;
      
      $("#refresh").click(function(){
-        device_ip = $("#device_ip").val();
+        device_id = $("#device_id").val();
         $('#indicator').css("display", "inline-block")
         $.ajax({
-          url: url+"?device_ip="+device_ip, 
+          url: url+"?device_id="+device_id,
           success: function(data) {
             $('#indicator').css("display", "none")
             if(data_length!=data.length)
